@@ -1,14 +1,14 @@
 # Setting up MongoDB
 
-Once you install the MongoDB using the command - PIP INSTALL PYMONGO or PIP INSTALL MONGODB and then after you intall the MongoDB Compas Commnunity version
+Once you install the MongoDB using the command - PIP INSTALL PYMONGO or PIP INSTALL MONGODB and then after you intall the MongoDB Compass Commnunity version
 you will have to initialize the MongoDB. To do that try this command in terminal(MAC) or equivalent command in Windows CMD
 
 ps -alx | grep mongod
 
 This should list two processes running. If it displays only one process, then run the below commands
 
-mkdir $HOME/data
-mongod --dbpath $HOME/data
+$ mkdir $HOME/data
+$ mongod --dbpath $HOME/data
 
 Once this is done you should be able to initialize the cluster in MongoDB Compass
 
