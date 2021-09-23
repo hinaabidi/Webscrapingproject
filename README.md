@@ -1,3 +1,8 @@
+# To run this project in your machine(Macbook).
+
+Run "Python app.py"
+and then access this URL http://127.0.0.1:5000 in Google Chrome Browser.
+
 # Setting up MongoDB
 
 Once you install the MongoDB using the command - PIP INSTALL PYMONGO or PIP INSTALL MONGODB and then after you intall the MongoDB Compass Commnunity version
@@ -11,7 +16,6 @@ $ mkdir $HOME/data
 $ mongod --dbpath $HOME/data
 
 Once this is done you should be able to initialize the cluster in MongoDB Compass
-
 # Web Scraping Homework - Mission to Mars
 
 ![mission_to_mars](Images/mission_to_mars.png)
