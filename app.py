@@ -25,7 +25,14 @@ def index():
 def scrape():     
     print("I am in scrape")
     mars_info=Mission_to_Mars.Mission_to_Mars()
+    #mars_info=scrape_mars.img_scrape()
+    #mars_info=scrape_mars.mars_weather()
+    mars_info=Mission_to_Mars.mars_facts()
+    mars_info=Mission_to_Mars.featured_image()
+    mars_info=Mission_to_Mars.get_hemisphere_data()
+    #mars_info=scrape_mars.mars_hem()
+    mongo.db.mars_db.update({},mars_info,upsert=True)
     return redirect("/")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

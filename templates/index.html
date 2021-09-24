@@ -6,7 +6,7 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-     <link rel="stylesheet" href="css/Styles.css">
+     <link rel="stylesheet" href= "{{ url_for('static',filename='styles/styles.css') }}">
 	<title>Mission to Mars</title>
 </head>
 <body>
@@ -15,17 +15,57 @@
 			<h1>
 				Mission to Mars
 			</h1>
-			<button type="button" class="btn btn-primary scrape-button">Scrape New Data</button>
+			<!--<button type="button" class="btn btn-primary scrape-button">Scrape New Data</button>-->
+			<a class="btn btn-lg text-white btn-primary" href="/scrape" role="button">Scrape New
+				Data</a>
 
 		</div>	
-		<div class="row row-grid top-buffer news_container">
-			<h2>
-				Latest Mars News
-			</h2>
-			<p>
-				NASA's Mars Rover Drivers Need Your Help
-			</p>
+		<div class="container-fluid">
+			<div class="row row-grid top-buffer news_container">
+				<h2>Latest Mars News</h2>
+				<h4>
+					{{data.news_title}}
+				</h4>
+				<p>
+					{{data.news_paragraph}}
+				</p>
+			</div>
 		</div>
+
+		<div class="container-fluid">
+      <div class='row'>
+        <!--<div class="col-lg-8 col-md-7 col-sm-6 col-xm-12">-->
+		<div class="col-sm-8">
+			<h3>Featured Mars Image</h3>
+			<img src="{{data.featured_image}}" style="max-width:100%; max-height: auto;" alt="mars image">
+        
+        </div>
+        <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xm-12">-->
+		<div class="col-sm-4">
+          <!-- Table -->
+          <br>
+          <h5>Mars Facts</h5>
+          <!--<table class="table table-striped" border="1" class="">{{ data.mars_facts|safe}}</table>-->
+          {{data.mars_facts|safe}}
+
+        </div>
+      </div>
+	  <div class="container-fluid">
+		<div class='row'>
+			{% for item in data.hemi_urls_and_titles %}
+				  <div class="col-sm">
+					  <div class="card text-white bg-dark" style="margin: 30px;">
+						  <img class="card-img-top" src="{{item.img_url}}" />
+						  <div class="card-body">
+							  <p class="card-text">{{ item.title }}</p>
+						  </div>
+					  </div>
+				  </div>
+			{% endfor %}
+		  </div>
+	  </div>
+	  
+    </div>
 	</div>
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>

@@ -38,9 +38,52 @@ def Mission_to_Mars():
     return data_for_website
 
 
+def mars_facts():
+    
+     # Visit the Mars Facts webpage
+    df_mars = pd.read_html('https://space-facts.com/mars/')[0].rename(columns={0: 'Parameters', 1: 'values'})
+    df_earth = pd.read_html('https://space-facts.com/earth/')[0].rename(columns={0: 'Parameters', 1: 'values'})
+    df_comparison = df_earth.merge(df_mars, on='Parameters', how='left')
+    df_comparison_renamed = df_comparison.rename(columns={'Parameters': 'Description', 'values_x': 'Mars', 'values_y': 'Earth'})
+    #df.head()
+    mars_facts = df_comparison_renamed.to_html(classes='table table-striped', index=False).replace('<tr style="text-align: right;">','<tr>')
+    data_for_website['mars_facts'] = mars_facts
+    return data_for_website
 
 
 
 
+def featured_image():
+    data_for_website['featured_image'] = 'https://spaceimages-mars.com/image/featured/mars2.jpg'
+    return data_for_website
 
 
+def get_hemisphere_data():
+    browser = init_chrome_browser()
+    base_url = 'https://marshemispheres.com'
+
+    browser.visit(base_url)
+    html = browser.html
+    soup = bs(html, 'html.parser')
+    items = soup.find_all('div', class_='item')
+    titles=[]
+    img_urls=[]
+
+    for item in items:
+        title = item.find('h3').text
+        titles.append(title)
+        
+        url = item.find('a')['href']
+        image_url = base_url + "/" + url
+        
+        browser.visit(image_url)
+        html = browser.html
+        soup = bs(html, 'html.parser')
+        img_original= soup.find('div',class_='downloads')
+        img_url=img_original.find('a')['href']
+        image_full_url = base_url + "/" + img_url
+        img_data=dict({'title':title, 'img_url':image_full_url})
+        img_urls.append(img_data)
+    data_for_website['hemi_urls_and_titles'] = img_urls
+    return data_for_website
+    
